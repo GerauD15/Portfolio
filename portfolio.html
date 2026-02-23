@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achille KOUDAMIRO — Ingénieur Cybersécurité</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:            #06080f;
+  --bg2:           #0b0f1a;
+  --bg3:           #101624;
+  --border:        #1e2d4a;
+  --border-bright: #2d4a8a;
+  --accent:        #38bdf8;
+  --accent-dim:    rgba(56,189,248,0.10);
+  --green:         #34d399;
+  --green-dim:     rgba(52,211,153,0.10);
+  --orange:        #fb923c;
+  --purple:        #a78bfa;
+  --purple-dim:    rgba(167,139,250,0.12);
+  --danger:        #f87171;
+  --warn:          #fbbf24;
+  --text:          #b8cce0;
+  --text-dim:      #4a6280;
+  --text-bright:   #e2f0ff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+/* GRID BACKGROUND */
+body::before {
+content:’’;
+position:fixed; inset:0;
+background-image:
+linear-gradient(rgba(56,189,248,0.02) 1px, transparent 1px),
+linear-gradient(90deg, rgba(56,189,248,0.02) 1px, transparent 1px);
+background-size: 48px 48px;
+pointer-events:none; z-index:0;
+}
+body::after {
+content:’’;
+position:fixed; inset:0;
+background: repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.05) 3px,rgba(0,0,0,0.05) 4px);
+pointer-events:none; z-index:1;
+}
+
+/* NAV */
+nav {
+position: fixed; top:0; left:0; right:0; z-index:100;
+background: rgba(6,8,15,0.92);
+backdrop-filter: blur(12px);
+border-bottom: 1px solid var(–border);
+padding: 0 40px;
+display: flex; align-items:center; justify-content:space-between;
+height: 60px;
+}
+.nav-logo {
+font-family: ‘Orbitron’, monospace;
+font-size: 14px; font-weight: 900;
+color: var(–text-bright);
+letter-spacing: 3px;
+display: flex; align-items:center; gap:10px;
+}
+.nav-logo span { color: var(–purple); }
+.nav-links { display:flex; gap:28px; }
+.nav-links a {
+font-family: ‘Share Tech Mono’, monospace;
+font-size: 12px; letter-spacing: 1.5px;
+color: var(–text-dim); text-decoration:none;
+text-transform: uppercase;
+transition: color 0.2s;
+}
+.nav-links a:hover { color: var(–accent); }
+.nav-status {
+font-family: ‘Share Tech Mono’, monospace;
+font-size: 11px; color: var(–green);
+display: flex; align-items:center; gap:7px;
+}
+.dot { width:7px; height:7px; border-radius:50%; background:var(–green); box-shadow:0 0 8px var(–green); animation: blink 2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+/* HERO */
+.hero {
+position: relative; z-index:2;
+min-height: 100vh;
+display: flex; align-items:center; justify-content:center;
+padding: 80px 40px 60px;
+text-align: center;
+}
+.hero-content { max-width: 800px; }
+.hero-tag {
+font-family: ‘Share Tech Mono’, monospace;
+font-size: 12px; letter-spacing: 3px;
+color: var(–purple);
+margin-bottom: 20px;
+animation: fadeUp 0.6s ease both;
+}
+.hero-name {
+font-family: ‘Orbitron’, monospace;
+font-size: clamp(32px, 6vw, 64px);
+font-weight: 900;
+color: var(–text-bright);
+letter-spacing: 4px;
+line-height: 1.1;
+margin-bottom: 16px;
+animation: fadeUp 0.6s 0.1s ease both;
+}
+.hero-name span { color: var(–purple); }
+.hero-title {
+font-family: ‘Rajdhani’, sans-serif;
+font-size: clamp(16px, 3vw, 22px);
+font-weight: 600;
+color: var(–accent);
+letter-spacing: 3px;
+text-transform: uppercase;
+margin-bottom: 24px;
+animation: fadeUp 0.6s 0.2s ease both;
+}
+.hero-desc {
+font-size: 16px; line-height: 1.7;
+color: var(–text); max-width: 620px; margin: 0 auto 36px;
+animation: fadeUp 0.6s 0.3s ease both;
+}
+.hero-badges {
+display: flex; flex-wrap:wrap; gap:10px;
+justify-content: center; margin-bottom: 40px;
+animation: fadeUp 0.6s 0.4s ease both;
+}
+.badge {
+font-family: ‘Share Tech Mono’, monospace;
+font-size: 11px; letter-spacing: 1px;
+padding: 6px 14px; border-radius: 4px;
+border: 1px solid;
+}
+.badge-purple { background: var(–purple-dim); border-color: rgba(167,139,250,0.3); color: var(–purple); }
+.badge-green  { background: var(–green-dim);  border-color: rgba(52,211,153,0.25);  color: var(–green);  }
+.badge-accent { background: var(–accent-dim); border-color: rgba(56,189,248,0.25);  color: var(–accent); }
+.badge-orange { background: rgba(251,146,60,0.08); border-color: rgba(251,146,60,0.25); color: var(–orange); }
+.hero-cta {
+display: flex; gap:14px; justify-content:center; flex-wrap:wrap;
+animation: fadeUp 0.6s 0.5s ease both;
+}
+.btn {
+font-family: ‘Share Tech Mono’, monospace;
+font-size: 12px; letter-spacing: 2px;
+padding: 12px 28px; border-radius: 6px;
+text-decoration: none; text-transform: uppercase;
+transition: all 0.2s; cursor:pointer; border:none;
+}
+.btn-primary {
+background: var(–purple-dim);
+border: 1px solid var(–purple);
+color: var(–purple);
+}
+.btn-primary:hover { background: rgba(167,139,250,0.25); box-shadow: 0 0 20px rgba(167,139,250,0.3); }
+.btn-secondary {
+background: transparent;
+border: 1px solid var(–border-bright);
+color: var(–text);
+}
+.btn-secondary:hover { border-color: var(–accent); color: var(–accent); }
+
+/* SCROLL INDICATOR */
+.scroll-hint {
+position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
+font-family:‘Share Tech Mono’,monospace; font-size:10px; color:var(–text-dim);
+letter-spacing:2px; text-align:center;
+animation: fadeUp 0.6s 0.8s ease both;
+}
+.scroll-hint::after {
+content:’’; display:block; width:1px; height:40px;
+background:linear-gradient(to bottom,var(–border-bright),transparent);
+margin: 8px auto 0;
+}
+
+/* SECTIONS */
+section { position:relative; z-index:2; padding: 80px 40px; max-width:1200px; margin:0 auto; }
+.section-label {
+font-family: ‘Share Tech Mono’, monospace;
+font-size: 11px; letter-spacing: 3px;
+color: var(–text-dim); text-transform:uppercase;
+margin-bottom: 8px;
+}
+.section-title {
+font-family: ‘Orbitron’, monospace;
+font-size: clamp(20px, 3vw, 28px);
+font-weight: 700; color: var(–text-bright);
+margin-bottom: 40px;
+display: flex; align-items:center; gap:14px;
+}
+.section-title::after {
+content:’’; flex:1; height:1px;
+background: linear-gradient(to right, var(–border-bright), transparent);
+}
+
+/* ABOUT */
+.about-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 40px; align-items: start;
+}
+.about-text { font-size:15px; line-height:1.8; color:var(–text); }
+.about-text p { margin-bottom:16px; }
+.about-text strong { color: var(–text-bright); }
+.about-stats { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.stat-card {
+background: var(–bg2); border: 1px solid var(–border);
+border-radius: 10px; padding: 20px;
+text-align:center; transition:all 0.2s;
+}
+.stat-card:hover { border-color:var(–purple); transform:translateY(-2px); }
+.stat-number {
+font-family:‘Orbitron’,monospace; font-size:28px; font-weight:900;
+color:var(–purple); margin-bottom:6px;
+}
+.stat-label { font-size:12px; color:var(–text-dim); font-family:‘Share Tech Mono’,monospace; letter-spacing:1px; }
+
+/* EXPERIENCE */
+.timeline { position:relative; padding-left:28px; }
+.timeline::before {
+content:’’; position:absolute; left:0; top:0; bottom:0;
+width:2px; background:linear-gradient(to bottom,var(–purple),var(–accent),transparent);
+}
+.tl-item {
+position:relative; margin-bottom:36px;
+background:var(–bg2); border:1px solid var(–border);
+border-radius:10px; padding:22px 24px;
+transition:all 0.2s;
+}
+.tl-item:hover { border-color:var(–purple); box-shadow:0 8px 30px rgba(0,0,0,0.3); }
+.tl-item::before {
+content:’’; position:absolute; left:-35px; top:24px;
+width:14px; height:14px; border-radius:50%;
+background:var(–purple); border:2px solid var(–bg);
+box-shadow:0 0 10px rgba(167,139,250,0.5);
+}
+.tl-header { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:12px; }
+.tl-role { font-family:‘Orbitron’,monospace; font-size:13px; font-weight:700; color:var(–text-bright); margin-bottom:4px; }
+.tl-org { font-family:‘Share Tech Mono’,monospace; font-size:12px; color:var(–purple); }
+.tl-date { font-family:‘Share Tech Mono’,monospace; font-size:11px; color:var(–text-dim); background:var(–bg3); border:1px solid var(–border); border-radius:4px; padding:3px 10px; white-space:nowrap; }
+.tl-desc { font-size:14px; color:var(–text); line-height:1.7; }
+.tl-desc li { margin:5px 0; padding-left:14px; position:relative; }
+.tl-desc li::before { content:‘→’; position:absolute; left:0; color:var(–accent); font-size:10px; top:2px; }
+
+/* SKILLS */
+.skills-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; }
+.skill-card {
+background:var(–bg2); border:1px solid var(–border);
+border-radius:10px; padding:20px;
+transition:all 0.2s; position:relative; overflow:hidden;
+}
+.skill-card::before { content:’’; position:absolute; top:0; left:0; right:0; height:2px; }
+.skill-card.purple::before { background:var(–purple); }
+.skill-card.green::before  { background:var(–green); }
+.skill-card.accent::before { background:var(–accent); }
+.skill-card.orange::before { background:var(–orange); }
+.skill-card:hover { transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,0.3); }
+.skill-card-icon { font-size:28px; margin-bottom:10px; }
+.skill-card-title { font-family:‘Orbitron’,monospace; font-size:11px; font-weight:700; color:var(–text-bright); letter-spacing:1px; margin-bottom:12px; }
+.skill-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.skill-tag {
+font-family:‘Share Tech Mono’,monospace; font-size:10px;
+padding:3px 8px; border-radius:3px;
+background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);
+color:var(–text-dim);
+}
+
+/* LAB */
+.lab-banner {
+background: linear-gradient(135deg, rgba(167,139,250,0.06), rgba(56,189,248,0.04));
+border: 1px solid var(–border);
+border-radius: 14px; padding:32px;
+margin-bottom: 28px;
+position:relative; overflow:hidden;
+}
+.lab-banner::before {
+content:’’; position:absolute; top:-50%; right:-10%;
+width:400px; height:400px; border-radius:50%;
+background: radial-gradient(circle, rgba(167,139,250,0.06) 0%, transparent 70%);
+pointer-events:none;
+}
+.lab-banner-title { font-family:‘Orbitron’,monospace; font-size:16px; font-weight:700; color:var(–text-bright); margin-bottom:10px; }
+.lab-banner-desc { font-size:14px; color:var(–text); line-height:1.7; max-width:700px; }
+.lab-zones { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:14px; margin-bottom:28px; }
+.zone-card {
+border-radius:10px; padding:18px;
+border:1px solid; transition:all 0.2s;
+}
+.zone-card:hover { transform:translateY(-2px); }
+.zone-card.wan   { background:rgba(37,99,235,0.07);  border-color:#2d5aad; }
+.zone-card.lab   { background:rgba(16,185,129,0.05); border-color:#0d7a55; }
+.zone-card.vpn   { background:rgba(124,58,237,0.07); border-color:#5b21b6; }
+.zone-card.soc   { background:rgba(167,139,250,0.06);border-color:#6d3fc5; }
+.zone-card-title { font-family:‘Orbitron’,monospace; font-size:10px; font-weight:700; letter-spacing:2px; margin-bottom:10px; }
+.zone-card.wan .zone-card-title   { color:#60a5fa; }
+.zone-card.lab .zone-card-title   { color:var(–green); }
+.zone-card.vpn .zone-card-title   { color:var(–purple); }
+.zone-card.soc .zone-card-title   { color:var(–purple); }
+.zone-card-items { font-family:‘Share Tech Mono’,monospace; font-size:11px; color:var(–text-dim); line-height:2; }
+
+/* PURPLE TEAM */
+.pt-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+.pt-card {
+background:var(–bg2); border:1px solid rgba(167,139,250,0.2);
+border-radius:10px; padding:18px; position:relative; overflow:hidden;
+}
+.pt-card::before { content:’’; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(to right,var(–purple),transparent); }
+.pt-phase { font-family:‘Share Tech Mono’,monospace; font-size:10px; padding:2px 8px; border-radius:3px; background:rgba(167,139,250,0.1); border:1px solid rgba(167,139,250,0.25); color:var(–purple); margin-bottom:10px; display:inline-block; }
+.pt-title { font-family:‘Rajdhani’,sans-serif; font-size:15px; font-weight:700; color:var(–text-bright); margin-bottom:8px; }
+.pt-content { font-family:‘Share Tech Mono’,monospace; font-size:11px; color:var(–text-dim); line-height:1.9; }
+
+/* CERTS */
+.certs-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+.cert-card {
+background:var(–bg2); border:1px solid var(–border);
+border-radius:8px; padding:14px 16px;
+display:flex; align-items:flex-start; gap:12px;
+transition:all 0.2s;
+}
+.cert-card:hover { border-color:var(–accent); transform:translateY(-2px); }
+.cert-icon { font-size:20px; flex-shrink:0; }
+.cert-name { font-size:13px; font-weight:700; color:var(–text-bright); margin-bottom:3px; }
+.cert-org { font-family:‘Share Tech Mono’,monospace; font-size:11px; color:var(–accent); }
+.cert-date { font-family:‘Share Tech Mono’,monospace; font-size:10px; color:var(–text-dim); margin-top:2px; }
+
+/* CONTACT */
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+.contact-info { background:var(–bg2); border:1px solid var(–border); border-radius:12px; padding:28px; }
+.contact-info-title { font-family:‘Orbitron’,monospace; font-size:13px; color:var(–text-bright); margin-bottom:20px; }
+.contact-item { display:flex; align-items:center; gap:12px; margin-bottom:14px; font-family:‘Share Tech Mono’,monospace; font-size:13px; }
+.contact-item span:first-child { font-size:18px; }
+.contact-item a { color:var(–accent); text-decoration:none; }
+.contact-item a:hover { color:var(–text-bright); }
+.contact-availability {
+background:var(–bg2); border:1px solid var(–border); border-radius:12px; padding:28px;
+display:flex; flex-direction:column; justify-content:center;
+}
+.avail-title { font-family:‘Orbitron’,monospace; font-size:13px; color:var(–text-bright); margin-bottom:16px; }
+.avail-item { display:flex; align-items:center; gap:10px; margin-bottom:12px; font-size:14px; color:var(–text); }
+.avail-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.avail-dot.green  { background:var(–green);  box-shadow:0 0 6px var(–green);  animation:blink 2s infinite; }
+.avail-dot.yellow { background:var(–warn);   box-shadow:0 0 6px var(–warn); }
+.avail-dot.purple { background:var(–purple); box-shadow:0 0 6px var(–purple); }
+
+/* FOOTER */
+footer {
+position:relative; z-index:2;
+border-top:1px solid var(–border);
+padding:28px 40px;
+display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;
+}
+.footer-logo { font-family:‘Orbitron’,monospace; font-size:12px; color:var(–text-dim); letter-spacing:2px; }
+.footer-copy { font-family:‘Share Tech Mono’,monospace; font-size:11px; color:var(–text-dim); }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+from { opacity:0; transform:translateY(20px); }
+to   { opacity:1; transform:translateY(0); }
+}
+.reveal {
+opacity:0; transform:translateY(24px);
+transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* DIVIDER */
+.divider { height:1px; background:linear-gradient(to right,transparent,var(–border),transparent); margin:0 40px; position:relative; z-index:2; }
+
+/* RESPONSIVE */
+@media(max-width:768px) {
+nav { padding:0 20px; }
+.nav-links { display:none; }
+section { padding:60px 20px; }
+.about-grid { grid-template-columns:1fr; }
+.contact-grid { grid-template-columns:1fr; }
+.hero { padding:100px 20px 60px; }
+footer { padding:20px; flex-direction:column; text-align:center; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <div class="nav-logo">🛡️ <span>ACHILLE</span> KOUDAMIRO</div>
+  <div class="nav-links">
+    <a href="#about">À propos</a>
+    <a href="#experience">Expérience</a>
+    <a href="#skills">Compétences</a>
+    <a href="#lab">Homelab</a>
+    <a href="#purple">Purple Team</a>
+    <a href="#certs">Certifications</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-status">
+    <span class="dot"></span>
+    Disponible
+  </div>
+</nav>
+
+<!-- HERO -->
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">// INGÉNIEUR CYBERSÉCURITÉ · BÉNIN · 2026</div>
+    <h1 class="hero-name">ACHILLE<br><span>KOUDAMIRO</span></h1>
+    <div class="hero-title">Pentest · SOC · Purple Team · Architecture Sécurité</div>
+    <p class="hero-desc">
+      Master en Sécurité Informatique. Je construis des infrastructures défensives robustes,
+      simule des attaques réelles et transforme chaque exercice en amélioration concrète de la détection.
+      Approche Purple Team — offensif et défensif en même temps.
+    </p>
+    <div class="hero-badges">
+      <span class="badge badge-purple">CRTA — CyberWarFare Labs</span>
+      <span class="badge badge-accent">eJPT — eLearnSecurity</span>
+      <span class="badge badge-green">Master Sécurité Informatique</span>
+      <span class="badge badge-orange">Pentest · AD · ELK Stack</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Me contacter</a>
+      <a href="#lab" class="btn btn-secondary">Voir le Lab →</a>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+
+<section id="about">
+  <div class="section-label">// 01</div>
+  <h2 class="section-title reveal">À propos</h2>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>
+        Ingénieur cybersécurité basé au <strong>Bénin</strong>, je combines une approche offensive (pentest, Red Team)
+        et défensive (SOC, monitoring, Blue Team) pour construire des systèmes réellement résilients.
+      </p>
+      <p>
+        Mon expérience à l'<strong>APDP</strong> m'a confronté à des environnements réels — audit de PSSI,
+        pentest de sites web d'entreprises, conformité RGPD. Consultant indépendant depuis 2024,
+        je conçois des architectures réseau sécurisées et accompagne les organisations dans leur
+        posture de sécurité.
+      </p>
+      <p>
+        J'ai construit un <strong>homelab complet sous Proxmox</strong> — SOC fonctionnel avec ELK Stack,
+        Active Directory, firewall MikroTik, VPN WireGuard et Tailscale —
+        pour pratiquer les scénarios d'attaque et affiner la détection en temps réel.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-number">3+</div>
+        <div class="stat-label">Années expérience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">M2</div>
+        <div class="stat-label">Sécurité Informatique</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">CRTA</div>
+        <div class="stat-label">Red Team Analyst</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">SOC</div>
+        <div class="stat-label">Lab ELK fonctionnel</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+
+<section id="experience">
+  <div class="section-label">// 02</div>
+  <h2 class="section-title reveal">Expérience</h2>
+  <div class="timeline reveal">
+
+```
+<div class="tl-item">
+  <div class="tl-header">
+    <div>
+      <div class="tl-role">Consultant IT Indépendant</div>
+      <div class="tl-org">Architecture · Réseaux · Sécurité</div>
+    </div>
+    <div class="tl-date">Depuis Janvier 2024</div>
+  </div>
+  <ul class="tl-desc">
+    <li>Conception d'architectures réseaux sécurisées et plans d'adressage IP</li>
+    <li>Modélisation de topologies LAN/WAN avec Microsoft Visio</li>
+    <li>Rédaction de guides techniques pour infrastructures (systèmes, réseaux, sécurité)</li>
+    <li>Support sur environnements Active Directory et virtualisation</li>
+  </ul>
+</div>
+
+<div class="tl-item">
+  <div class="tl-header">
+    <div>
+      <div class="tl-role">Pentester & Analyste Cybersécurité</div>
+      <div class="tl-org">APDP — Autorité de Protection des Données Personnelles</div>
+    </div>
+    <div class="tl-date">Mars 2025 — Sept. 2025</div>
+  </div>
+  <ul class="tl-desc">
+    <li>Pentesting des sites web des entreprises soumises au contrôle de l'APDP</li>
+    <li>Rédaction de rapports complets de vulnérabilité et recommandations de remédiation</li>
+    <li>Audit des PSSI et politiques de confidentialité (conformité réglementaire)</li>
+    <li>Audit annuel de contrôle des entreprises en matière de protection des données</li>
+    <li>Rédaction de lettres d'observation et préconisation d'actions correctives</li>
+  </ul>
+</div>
+
+<div class="tl-item">
+  <div class="tl-header">
+    <div>
+      <div class="tl-role">Technicien Informatique</div>
+      <div class="tl-org">ORTB — Office de Radiodiffusion et Télévision du Bénin</div>
+    </div>
+    <div class="tl-date">Juillet 2021 — Oct. 2021</div>
+  </div>
+  <ul class="tl-desc">
+    <li>Maintenance préventive et curative (macOS et Windows)</li>
+    <li>Mise en place du serveur web open source Nginx</li>
+    <li>Troubleshooting réseau et reconnaissance active</li>
+    <li>Sécurité défensive du réseau</li>
+  </ul>
+</div>
+
+<div class="tl-item">
+  <div class="tl-header">
+    <div>
+      <div class="tl-role">Support Interne — Département IT</div>
+      <div class="tl-org">ORTB</div>
+    </div>
+    <div class="tl-date">Mars 2020 — Juillet 2020</div>
+  </div>
+  <ul class="tl-desc">
+    <li>Familiarisation Active Directory sur le serveur ORTB</li>
+    <li>Configuration partage de fichiers réseau et sertissage câbles Ethernet</li>
+    <li>Déploiement Windows 10 sur plusieurs postes de travail</li>
+    <li>Maintenance matérielle desktop et laptop</li>
+  </ul>
+</div>
+```
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+
+<section id="skills">
+  <div class="section-label">// 03</div>
+  <h2 class="section-title reveal">Compétences</h2>
+  <div class="skills-grid reveal">
+
+```
+<div class="skill-card purple">
+  <div class="skill-card-icon">⚔️</div>
+  <div class="skill-card-title">Pentest & Offensif</div>
+  <div class="skill-tags">
+    <span class="skill-tag">Kali Linux</span>
+    <span class="skill-tag">Metasploit</span>
+    <span class="skill-tag">Mimikatz</span>
+    <span class="skill-tag">BloodHound</span>
+    <span class="skill-tag">Nmap</span>
+    <span class="skill-tag">Burp Suite</span>
+    <span class="skill-tag">Responder</span>
+    <span class="skill-tag">CrackMapExec</span>
+    <span class="skill-tag">ntlmrelayx</span>
+    <span class="skill-tag">CTF Player</span>
+  </div>
+</div>
+
+<div class="skill-card green">
+  <div class="skill-card-icon">🛡️</div>
+  <div class="skill-card-title">SOC & Défensif</div>
+  <div class="skill-tags">
+    <span class="skill-tag">ELK Stack</span>
+    <span class="skill-tag">Elasticsearch</span>
+    <span class="skill-tag">Kibana</span>
+    <span class="skill-tag">Logstash</span>
+    <span class="skill-tag">Elastic Fleet</span>
+    <span class="skill-tag">Splunk</span>
+    <span class="skill-tag">Wazuh</span>
+    <span class="skill-tag">Suricata</span>
+    <span class="skill-tag">Wireshark</span>
+    <span class="skill-tag">SIEM</span>
+  </div>
+</div>
+
+<div class="skill-card accent">
+  <div class="skill-card-icon">🌐</div>
+  <div class="skill-card-title">Réseau & Infrastructure</div>
+  <div class="skill-tags">
+    <span class="skill-tag">MikroTik RouterOS</span>
+    <span class="skill-tag">WireGuard</span>
+    <span class="skill-tag">Tailscale</span>
+    <span class="skill-tag">Proxmox VE</span>
+    <span class="skill-tag">VMware</span>
+    <span class="skill-tag">Active Directory</span>
+    <span class="skill-tag">DNS/DHCP</span>
+    <span class="skill-tag">Firewall</span>
+    <span class="skill-tag">NAT/VPN</span>
+    <span class="skill-tag">Samba</span>
+  </div>
+</div>
+
+<div class="skill-card orange">
+  <div class="skill-card-icon">💻</div>
+  <div class="skill-card-title">Systèmes & Dev</div>
+  <div class="skill-tags">
+    <span class="skill-tag">Linux (Ubuntu)</span>
+    <span class="skill-tag">Windows Server</span>
+    <span class="skill-tag">Python</span>
+    <span class="skill-tag">Bash</span>
+    <span class="skill-tag">HTML/CSS</span>
+    <span class="skill-tag">Docker</span>
+    <span class="skill-tag">Nginx</span>
+    <span class="skill-tag">Git/GitHub</span>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOMELAB -->
+
+<section id="lab">
+  <div class="section-label">// 04</div>
+  <h2 class="section-title reveal">Homelab — Lab Achille</h2>
+
+  <div class="lab-banner reveal">
+    <div class="lab-banner-title">🖥️ Infrastructure SOC / Purple Team — Proxmox VE</div>
+    <div class="lab-banner-desc">
+      Homelab complet virtualisé sur HP Laptop (Proxmox VE) — SOC fonctionnel avec ELK Stack,
+      Active Directory, firewall MikroTik CHR, VPN WireGuard et Tailscale.
+      Conçu pour pratiquer les scénarios Purple Team : attaques AD, corrélation SIEM, amélioration de la détection.
+    </div>
+  </div>
+
+  <div class="lab-zones reveal">
+    <div class="zone-card wan">
+      <div class="zone-card-title">🔵 Zone WAN</div>
+      <div class="zone-card-items">
+        Huawei ONT · Gateway FAI<br>
+        MikroTik CHR · Firewall/NAT<br>
+        Proxmox VE · Hyperviseur<br>
+        Clients Dell G15 · Lenovo
+      </div>
+    </div>
+    <div class="zone-card lab">
+      <div class="zone-card-title">🟢 Zone LAB/TRUST</div>
+      <div class="zone-card-items">
+        DC01 · Windows Server 2022<br>
+        AD · DNS · Kerberos · LDAP<br>
+        Ubuntu Server · Samba<br>
+        ELK · Logstash · Kibana
+      </div>
+    </div>
+    <div class="zone-card soc">
+      <div class="zone-card-title">🟣 Zone SOC</div>
+      <div class="zone-card-items">
+        Ubuntu 22.04 · Dual NIC<br>
+        Elasticsearch · Kibana<br>
+        Elastic Fleet · Logstash<br>
+        Scanopy · Docker
+      </div>
+    </div>
+    <div class="zone-card vpn">
+      <div class="zone-card-title">🔒 Accès Distant</div>
+      <div class="zone-card-items">
+        WireGuard · UDP 13231<br>
+        Tailscale · 7 nodes<br>
+        P2P mesh chiffré<br>
+        Accès Lab distant sécurisé
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label reveal" style="margin-bottom:16px;">// PIPELINE LOGS SOC</div>
+  <div class="reveal" style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:22px;font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--text);line-height:1.8;overflow-x:auto;">
+    <span style="color:var(--green);">MikroTik Syslog</span> + <span style="color:var(--accent);">Elastic Agent</span> (DC01, Ubuntu)
+    → <span style="color:var(--warn);">Logstash :1514 (parse · filter · enrich)</span>
+    → <span style="color:#60a5fa;">Elasticsearch :9200 (index mikrotik-logs-YYYY.MM.dd)</span>
+    → <span style="color:var(--purple);">Kibana :5601 (SIEM · Dashboards · Alertes Purple Team)</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PURPLE TEAM -->
+
+<section id="purple">
+  <div class="section-label">// 05</div>
+  <h2 class="section-title reveal">Purple Team</h2>
+
+  <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:10px;padding:16px 20px;margin-bottom:24px;font-size:14px;color:var(--text);line-height:1.7;" class="reveal">
+    🟣 <strong style="color:var(--purple);">Purple Team</strong> = Red Team (attaque) + Blue Team (défense) en collaboration.
+    Objectif : simuler des attaques réelles sur l'AD, corréler avec les logs ELK, améliorer les règles de détection SIEM.
+  </div>
+
+  <div class="pt-grid reveal">
+    <div class="pt-card">
+      <span class="pt-phase">SCÉNARIO 1</span>
+      <div class="pt-title">Kerberoasting</div>
+      <div class="pt-content">
+        <span style="color:var(--danger);">Attaque :</span> Requête TGS pour SPN → crack hashcat offline<br>
+        <span style="color:var(--accent);">Détection :</span> Event 4769 + compte non-admin demande TGS<br>
+        <span style="color:var(--green);">Fix :</span> Mdp fort comptes service + AES enforced
+      </div>
+    </div>
+    <div class="pt-card">
+      <span class="pt-phase">SCÉNARIO 2</span>
+      <div class="pt-title">SMB Relay</div>
+      <div class="pt-content">
+        <span style="color:var(--danger);">Attaque :</span> Responder + ntlmrelayx → accès sans creds<br>
+        <span style="color:var(--accent);">Détection :</span> Event 4624 type 3 depuis IP inattendue<br>
+        <span style="color:var(--green);">Fix :</span> SMB Signing obligatoire + désactiver LLMNR
+      </div>
+    </div>
+    <div class="pt-card">
+      <span class="pt-phase">SCÉNARIO 3</span>
+      <div class="pt-title">DCSync</div>
+      <div class="pt-content">
+        <span style="color:var(--danger);">Attaque :</span> Mimikatz dcsync → dump hashes KRBTGT + Admin<br>
+        <span style="color:var(--accent);">Détection :</span> Event 4662 — accès DS-Replication-Get-Changes-All<br>
+        <span style="color:var(--green);">Fix :</span> Audit AD + alerte replication hors DC
+      </div>
+    </div>
+    <div class="pt-card">
+      <span class="pt-phase">SCÉNARIO 4</span>
+      <div class="pt-title">Lateral Movement + Corrélation SIEM</div>
+      <div class="pt-content">
+        <span style="color:var(--danger);">Attaque :</span> PTH DC01 → pivot vers Ubuntu via Samba<br>
+        <span style="color:var(--accent);">Détection :</span> Kibana — connexion Samba depuis IP DC01 (anormale)<br>
+        <span style="color:var(--green);">Résultat :</span> Corrélation SIEM → amélioration règles firewall
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text-dim);line-height:2;" class="reveal">
+    Event IDs surveillés dans Kibana :
+    <span style="color:var(--accent);">4624</span> Connexion réussie ·
+    <span style="color:var(--danger);">4625</span> Échec connexion ·
+    <span style="color:var(--warn);">4672</span> Privilèges spéciaux ·
+    <span style="color:var(--purple);">4768</span> Demande TGT ·
+    <span style="color:var(--purple);">4769</span> Demande TGS ·
+    <span style="color:var(--danger);">4662</span> Accès objet AD (DCSync)
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CERTIFICATIONS -->
+
+<section id="certs">
+  <div class="section-label">// 06</div>
+  <h2 class="section-title reveal">Certifications & Formation</h2>
+  <div class="certs-grid reveal">
+    <div class="cert-card">
+      <div class="cert-icon">🔴</div>
+      <div>
+        <div class="cert-name">CRTA</div>
+        <div class="cert-org">CyberWarFare Labs</div>
+        <div class="cert-date">Novembre 2025</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🔵</div>
+      <div>
+        <div class="cert-name">Certified Cyber Security Analyst</div>
+        <div class="cert-org">CyberWarFare Labs</div>
+        <div class="cert-date">Février 2025</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div>
+        <div class="cert-name">Master 2 — Sécurité Informatique</div>
+        <div class="cert-org">ESGIS</div>
+        <div class="cert-date">Juin 2025</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">⚡</div>
+      <div>
+        <div class="cert-name">eJPT — Junior Penetration Tester</div>
+        <div class="cert-org">eLearnSecurity</div>
+        <div class="cert-date">Septembre 2022</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🏛️</div>
+      <div>
+        <div class="cert-name">SecNumacademie MOOC</div>
+        <div class="cert-org">ANSSI</div>
+        <div class="cert-date">Septembre 2022</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🎯</div>
+      <div>
+        <div class="cert-name">Ethical Hacking Essential (EHE)</div>
+        <div class="cert-org">EC-Council</div>
+        <div class="cert-date">Novembre 2022</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📊</div>
+      <div>
+        <div class="cert-name">Splunk — Maîtriser les fondamentaux</div>
+        <div class="cert-org">Alphorm</div>
+        <div class="cert-date">Janvier 2023</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🏆</div>
+      <div>
+        <div class="cert-name">Licence Pro — Sécurité Réseau & Système</div>
+        <div class="cert-org">ESGIS</div>
+        <div class="cert-date">Septembre 2020</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:24px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px;" class="reveal">
+    <div style="font-family:'Orbitron',monospace;font-size:11px;color:var(--warn);margin-bottom:12px;font-weight:700;">🏆 CTF & Compétitions</div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;">
+      <span style="font-family:'Share Tech Mono',monospace;font-size:12px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);color:var(--warn);padding:5px 12px;border-radius:4px;">Participant Google CTF 2022</span>
+      <span style="font-family:'Share Tech Mono',monospace;font-size:12px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);color:var(--warn);padding:5px 12px;border-radius:4px;">Finaliste HackersLabs 2022</span>
+      <span style="font-family:'Share Tech Mono',monospace;font-size:12px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);color:var(--warn);padding:5px 12px;border-radius:4px;">CTF Player EMS Sarl & CAF 2023</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+
+<section id="contact">
+  <div class="section-label">// 07</div>
+  <h2 class="section-title reveal">Contact</h2>
+  <div class="contact-grid reveal">
+    <div class="contact-info">
+      <div class="contact-info-title">Achille KOUDAMIRO</div>
+      <div class="contact-item">
+        <span>📧</span>
+        <a href="mailto:koudamiroa@gmail.com">koudamiroa@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <span>📞</span>
+        <span style="color:var(--text);">+229 0166490949</span>
+      </div>
+      <div class="contact-item">
+        <span>📍</span>
+        <span style="color:var(--text);">Bénin · Afrique de l'Ouest</span>
+      </div>
+      <div class="contact-item">
+        <span>🌐</span>
+        <span style="color:var(--text);">Disponible remote · Régional · International</span>
+      </div>
+    </div>
+    <div class="contact-availability">
+      <div class="avail-title">Disponibilités</div>
+      <div class="avail-item">
+        <span class="avail-dot green"></span>
+        Missions freelance / consulting
+      </div>
+      <div class="avail-item">
+        <span class="avail-dot green"></span>
+        Poste salarié — Bénin / Région
+      </div>
+      <div class="avail-item">
+        <span class="avail-dot purple"></span>
+        Remote — SOC Analyst / Pentest
+      </div>
+      <div class="avail-item">
+        <span class="avail-dot yellow"></span>
+        Collaboration Purple Team
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-logo">🛡️ ACHILLE KOUDAMIRO</div>
+  <div class="footer-copy">// Ingénieur Cybersécurité · Bénin · 2026</div>
+</footer>
+
+<script>
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
